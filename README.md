@@ -1,2 +1,13 @@
-# CampusConnect
-CampusConnect – VIIT is a full-stack platform connecting students, teachers, and organizers at VIIT. It combines study resource sharing, marketplace, events, lost &amp; found, and community discussions in one interactive system. With role-based dashboards, real-time notifications, and gamification, CampusConnect makes campus life smarter and engaging
+# CampusConnect – VIIT
+
+**What is this project about?**
+
+CampusConnect is a **full-stack college engagement platform** for students, teachers, and organizers at **VIIT**.  
+It aims to **enhance campus life and collaboration** by integrating features like:  
+- Study resource sharing  
+- Marketplace for buying/selling items  
+- Event management with QR check-ins  
+- Lost & Found system with notifications  
+- Community discussion board  
+
+This is a **work-in-progress project**. The full README and detailed documentation will be updated upon completion.
