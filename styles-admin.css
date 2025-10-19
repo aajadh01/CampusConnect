@@ -1,0 +1,81 @@
+:root {
+  --admin-primary: #1f2937;
+  --admin-accent: #2563eb;
+  --admin-muted: #e5e7eb;
+}
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.filter label {
+  display: block;
+  font-size: .8rem;
+  color: var(--text-secondary);
+}
+.filter input,
+.filter select {
+  padding: .5rem .75rem;
+  border: 1px solid var(--border-color);
+  border-radius: .5rem;
+  background: var(--bg-primary);
+}
+.spacer {
+  flex: 1;
+}
+canvas#adminChart {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: .75rem;
+}
+
+/* Dark mode overrides */
+body[data-theme="dark"] {
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --border-color: #1f2937;
+/* 🎨 Stylish Hamburger Button */
+.menu-toggle.stylish {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.stylish:hover {
+  transform: scale(1.1);
+}
+
+.menu-toggle.stylish span {
+  height: 4px;
+  width: 100%;
+  background-color: #007bff; /* 🔵 You can change this to your theme color */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ✨ Animation when active */
+.menu-toggle.stylish.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+  background-color: #e63946; /* red X */
+}
+
+.menu-toggle.stylish.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.stylish.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+  background-color: #e63946;
+}

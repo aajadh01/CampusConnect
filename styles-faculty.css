@@ -1,0 +1,40 @@
+:root {
+  --faculty-primary: #1d4ed8;
+  --faculty-accent: #0ea5e9;
+  --faculty-muted: #eef2ff;
+}
+.primary-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem 1rem;
+}
+.profile-menu {
+  position: relative;
+}
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  width: 240px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: .75rem;
+  padding: .75rem;
+  display: none;
+  box-shadow: var(--shadow-lg);
+}
+.profile-dropdown.active {
+  display: block;
+}
+.course-card {
+  background: var(--bg-primary);
+  padding: 1rem;
+  border-radius: .75rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+.stat-card:hover,
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}

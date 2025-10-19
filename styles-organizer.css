@@ -1,0 +1,42 @@
+:root {
+  --org-primary: #0ea5e9;
+  --org-accent: #f59e0b;
+  --org-muted: #e0f2fe;
+}
+.primary-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem 1rem;
+}
+.profile-menu {
+  position: relative;
+}
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  width: 240px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: .75rem;
+  padding: .75rem;
+  display: none;
+  box-shadow: var(--shadow-lg);
+}
+.profile-dropdown.active {
+  display: block;
+}
+.poster-preview {
+  margin: .5rem 0 1rem;
+  min-height: 120px;
+  border: 1px dashed var(--border-color);
+  border-radius: .75rem;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  background: var(--org-muted);
+}
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
