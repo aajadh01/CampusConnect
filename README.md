@@ -11,3 +11,5 @@ It aims to **enhance campus life and collaboration** by integrating features lik
 - Community discussion board  
 
 This is a **work-in-progress project**. The full README and detailed documentation will be updated upon completion.
+Till now created completely a forntend files and need to create a backend files
+
