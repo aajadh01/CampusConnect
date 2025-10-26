@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-student.css">
+    <link rel="stylesheet" href="styles-admin.css">
+</head>
+<body>
+    <div class="admin-page student-skin admin-skin">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="/public/images/viit-logo.png" alt="VIIT Logo" class="logo-img">
+                    <div class="brand-text">
+                        <span class="brand-name">CampusConnect</span>
+                        <span class="brand-subtitle">VIIT - Admin Panel</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary btn-small" onclick="logout()">
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <main class="admin-content">
+            <div class="container admin-container">
+                <div class="admin-header">
+                    <h1>User Management</h1>
+                    <button class="btn btn-primary" onclick="toggleModal('createUserModal')">
+                        + Create New User
+                    </button>
+                </div>
+
+                <div class="users-grid">
+                    <div class="user-type-section">
+                        <h2>Students</h2>
+                        <div id="studentsList" class="users-list"></div>
+                    </div>
+
+                    <div class="user-type-section">
+                        <h2>Faculty</h2>
+                        <div id="facultyList" class="users-list"></div>
+                    </div>
+
+                    <div class="user-type-section">
+                        <h2>Organizers</h2>
+                        <div id="organizersList" class="users-list"></div>
+                    </div>
+
+                    <div class="user-type-section">
+                        <h2>Admins</h2>
+                        <div id="adminsList" class="users-list"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="createUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New User</h2>
+                <button class="modal-close" onclick="toggleModal('createUserModal')">&times;</button>
+            </div>
+            <form id="createUserForm">
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" name="userRole" required>
+                        <option value="">Select Role</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Faculty</option>
+                        <option value="organizer">Organizer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Enter full name" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input 
+                        type="email" 
+                        id="userEmail" 
+                        name="userEmail" 
+                        placeholder="user@viit.ac.in" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="userId">Roll Number / Employee ID</label>
+                    <input 
+                        type="text" 
+                        id="userId" 
+                        name="userId" 
+                        placeholder="Enter ID" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="userPassword">Temporary Password</label>
+                    <input 
+                        type="password" 
+                        id="userPassword" 
+                        name="userPassword" 
+                        placeholder="Enter temporary password" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Create User
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>

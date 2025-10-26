@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Dashboard - CampusConnect</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles-faculty.css">
+  <link rel="stylesheet" href="styles-student.css"/>
+</head>
+<body>
+  <div class="app-layout student-skin">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>CampusConnect</h2>
+        <button class="sidebar-close" id="sidebarClose">×</button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="nav-item active" data-section="overview">Home</a>
+        <a href="#upload" class="nav-item" data-section="upload">Resources</a>
+        <a href="#events" class="nav-item" data-section="events">Events</a>
+        <a href="#community" class="nav-item" data-section="community">Community</a>
+        <a href="#verify" class="nav-item" data-section="verify">Verify Notes</a>
+        <a href="#settings" class="nav-item" data-section="settings">Settings</a>
+        <a href="#wishlist" id="linkWishlist" class="nav-item" data-section="wishlist">Wishlist</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary btn-block" onclick="logout()">Logout</button>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <svg class="hamburger-svg" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <circle class="bg" cx="16" cy="16" r="16"></circle>
+            <rect class="bar" x="8" y="11" width="16" height="2.6" rx="1.3"></rect>
+            <rect class="bar" x="8" y="15" width="16" height="2.6" rx="1.3"></rect>
+            <rect class="bar" x="8" y="19" width="16" height="2.6" rx="1.3"></rect>
+          </svg>
+        </button>
+        <nav class="primary-nav" style="margin-left:1rem;">
+          <a href="#overview" class="nav-item" data-section="overview">Home</a>
+          <a href="#upload" class="nav-item" data-section="upload">Resources</a>
+          <a href="#events" class="nav-item" data-section="events">Events</a>
+          <a href="#community" class="nav-item" data-section="community">Community</a>
+          <a href="#verify" class="nav-item" data-section="verify">Verify</a>
+          <a href="#settings" class="nav-item" data-section="settings">Settings</a>
+        </nav>
+        <div class="topbar-spacer"></div>
+        <div class="profile-menu" style="margin-left:.5rem;">
+          <button id="profileToggleFaculty" class="profile-toggle" aria-haspopup="true" aria-expanded="false">
+            <div class="user-avatar">F</div>
+          </button>
+          <div id="profileDropdownFaculty" class="profile-dropdown" role="menu" aria-hidden="true">
+            <div class="profile-header">
+              <div class="profile-meta">
+                <strong id="userName">  Faculty Name</strong>
+              </div>
+            </div>
+            <button class="dropdown-item" data-action="change-password">Change Password</button>
+            <button class="dropdown-item" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-area">
+        <section id="overview" class="content-section active">
+          <h1 class="section-heading">Welcome, <span id="userNameDisplay">Faculty</span>!</h1>
+          <div class="hero-banner">
+            <div class="hero-overlay">
+              <h2 class="hero-title">Guide learning with verified notes</h2>
+              <p class="hero-subtitle">Upload, review, and elevate student resources.</p>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-info"><h3 id="resourceCount">0</h3><p>Total Resources</p></div></div>
+            <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-info"><h3 id="pendingVerifyCount">0</h3><p>Pending Verifications</p></div></div>
+            <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-info"><h3 id="postCount">0</h3><p>Community Posts</p></div></div>
+            <div class="stat-card"><div class="stat-icon">📢</div><div class="stat-info"><h3 id="orgAnnouncementCount">0</h3><p>Announcements</p></div>
+          </div>
+          </div>
+        </section>
+
+        <section id="upload" class="content-section">
+          <h1 class="section-heading">Resources</h1>
+          <div class="filters-row" style="margin:.5rem 0 1rem;display:flex;gap:.5rem;align-items:end;flex-wrap:wrap;">
+            <div class="filter"><label>Branch</label><select id="filterBranch"><option value="">All</option><option>CSE</option><option>ECE</option><option>EEE</option><option>IT</option></select></div>
+            <div class="filter"><label>Semester</label><select id="filterSemester"><option value="">All</option><option>1-1</option><option>1-2</option><option>2-1</option><option>2-2</option><option>3-1</option><option>3-2</option><option>4-1</option><option>4-2</option></select></div>
+            <div class="filter" style="min-width:240px;flex:1 1 260px;">
+              <label for="filterTitle">Search Notes</label>
+              <input id="filterTitle" type="search" placeholder="Type note title or subject..." />
+            </div>
+            <button id="applyResourceFilters" class="btn btn-secondary">Apply</button>
+            <div class="spacer"></div>
+            <button class="btn btn-primary" onclick="toggleModal('uploadResourceModal')">+ Upload Resource</button>
+          </div>
+          <div id="resourcesList" class="resources-list"></div>
+        </section>
+
+        <section id="events" class="content-section">
+          <h1 class="section-heading">Events</h1>
+          <div class="events-grid" id="eventsGrid">
+            <div class="empty-state"><p>No events yet. Check back later!</p></div>
+          </div>
+        </section>
+
+        <section id="community" class="content-section">
+          <h1 class="section-heading">Community Discussions</h1>
+          <div class="filters-row" style="margin:.5rem 0 1rem;display:flex;gap:.5rem;align-items:end;flex-wrap:wrap;">
+            <div class="filter">
+              <label for="discussionsFilter">Category</label>
+              <select id="discussionsFilter">
+                <option value="">All</option>
+                <option value="general">General</option>
+                <option value="academic">Academic</option>
+                <option value="events">Events</option>
+                <option value="help">Help & Support</option>
+              </select>
+            </div>
+            <div class="spacer"></div>
+            <button class="btn btn-primary" onclick="toggleModal('postDiscussionModal')">+ New Discussion</button>
+          </div>
+          <div class="discussions-list" id="discussionsList">
+            <div class="empty-state">
+              <p>No discussions yet. Start a conversation!</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="verify" class="content-section">
+          <h1 class="section-heading">Verify Student Notes</h1>
+          <div class="filters-row">
+            <div class="filter" style="min-width:260px;flex:1 1 300px;">
+              <label for="verifySearch">Search Notes</label>
+              <input id="verifySearch" type="search" placeholder="Type note title or subject..." />
+            </div>
+            <div class="filter">
+              <label for="verifySemester">Semester</label>
+              <select id="verifySemester">
+                <option value="">All</option>
+                <option value="1-1">1-1</option>
+                <option value="1-2">1-2</option>
+                <option value="2-1">2-1</option>
+                <option value="2-2">2-2</option>
+                <option value="3-1">3-1</option>
+                <option value="3-2">3-2</option>
+                <option value="4-1">4-1</option>
+                <option value="4-2">4-2</option>
+              </select>
+            </div>
+            <div class="filter">
+              <label for="verifyBranch">Branch</label>
+              <select id="verifyBranch">
+                <option value="">All</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="IT">IT</option>
+              </select>
+            </div>
+            <button id="applyVerifyFilters" class="btn btn-secondary">Apply</button>
+          </div>
+          <div id="pendingVerifyList" class="resources-list">
+            <div class="empty-state"><p>No pending notes to verify.</p></div>
+          </div>
+        </section>
+
+        <section id="profile" class="content-section">
+          <h1 class="section-heading">Profile</h1>
+          <!-- Profile content will go here -->
+        </section>
+
+        <section id="settings" class="content-section">
+          <h1 class="section-heading">Settings</h1>
+          <div class="card pad-lg">
+            <label class="switch">
+              <input type="checkbox" id="toggleTheme"/>
+              <span>Dark mode</span>
+            </label>
+            <div class="form-group" style="margin-top:1rem">
+              <label for="facChangePwd">Change Password</label>
+              <input id="facChangePwd" type="password" placeholder="New password"/>
+              <button class="btn btn-secondary btn-small" style="margin-top:.5rem">Update</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="wishlist" class="content-section" aria-label="Wishlist">
+          <h1 class="section-heading">Wishlist</h1>
+          <div class="filters-row">
+            <div class="filter" style="min-width:260px;flex:1 1 300px;">
+              <label for="wishlistSearch">Search Wishlisted Notes</label>
+              <input id="wishlistSearch" type="search" placeholder="Type note title or subject..." />
+            </div>
+          </div>
+          <div id="wishlistGrid" class="resources-list">
+            <div class="empty-state">
+              <p>No saved notes yet. Tap the Wishlist icon on a note to save it here.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="uploadResourceModal">
+    <div class="modal-content">
+      <h2>Upload Resource</h2>
+      <button class="modal-close" onclick="toggleModal('uploadResourceModal')">×</button>
+      <form id="uploadResourceForm" data-form-type="resource">
+        <div class="form-group"><label>Title</label><input id="resourceTitle" required/></div>
+        <div class="form-group"><label>Subject / Semester</label><input id="resourceSubject" placeholder="e.g. DBMS / 3-2" required/></div>
+        <div class="form-group"><label>Description</label><textarea id="resourceDescription"></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Branch</label><select id="resourceBranch"><option value="">-</option><option>CSE</option><option>ECE</option><option>EEE</option><option>IT</option></select></div>
+          <div class="form-group"><label>Semester</label><select id="resourceSemester"><option value="">-</option><option>1-1</option><option>1-2</option><option>2-1</option><option>2-2</option><option>3-1</option><option>3-2</option><option>4-1</option><option>4-2</option></select></div>
+        </div>
+        <div class="form-group"><label>File</label><input id="resourceFile" type="file" accept=".pdf,.doc,.docx" /></div>
+        <button type="submit" class="btn btn-primary btn-block">Upload</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal student-modal" id="postDiscussionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Start a Discussion</h2>
+        <button class="modal-close" onclick="toggleModal('postDiscussionModal')">×</button>
+      </div>
+      <form id="postDiscussionForm" data-form-type="discussion">
+        <div class="form-group">
+          <label for="discussionTitle">Title</label>
+          <input type="text" id="discussionTitle" name="title" required data-field="title">
+        </div>
+        <div class="form-group">
+          <label for="discussionContent">Content</label>
+          <textarea id="discussionContent" name="content" rows="5" required data-field="content"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="discussionCategory">Category</label>
+          <select id="discussionCategory" name="category" data-field="category">
+            <option value="general">General</option>
+            <option value="academic">Academic</option>
+            <option value="events">Events</option>
+            <option value="help">Help & Support</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Post Discussion</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

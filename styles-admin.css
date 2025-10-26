@@ -1,0 +1,931 @@
+:root {
+  --admin-primary: #1f2937;
+  --admin-accent: #2563eb;
+  --admin-muted: #e5e7eb;
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.filter label {
+  display: block;
+  font-size: .8rem;
+  color: #d7e4ff;
+}
+.filter input,
+.filter select {
+  padding: .5rem .75rem;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .5rem;
+  background: #0f1a2c;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.filters-row .filter input:focus,
+.filters-row .filter select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+.spacer {
+  flex: 1;
+}
+canvas#adminChart {
+  background: color-mix(in oklab, var(--bg-primary) 70%, #0b1220) !important;
+  border: 1px solid color-mix(in oklab, var(--border-color) 70%, #3a4a62) !important;
+  border-radius: .75rem;
+  box-shadow: var(--shadow-md);
+}
+
+/* Dark mode overrides */
+body[data-theme="dark"] {
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --border-color: #1f2937;
+}
+
+/* 🎨 Stylish Hamburger Button */
+.menu-toggle.stylish {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.stylish:hover {
+  transform: scale(1.1);
+}
+
+.menu-toggle.stylish span {
+  height: 4px;
+  width: 100%;
+  background-color: #007bff; /* 🔵 You can change this to your theme color */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ✨ Animation when active */
+.menu-toggle.stylish.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+  background-color: #e63946; /* red X */
+}
+
+.menu-toggle.stylish.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.stylish.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+  background-color: #e63946;
+}
+
+/* unify form styling to match student design */
+.form-group label {
+  color: #d7e4ff;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .7rem;
+  padding: .7rem .85rem;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #b9c9e3;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+
+/* profile dropdown legibility */
+.profile-dropdown {
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+.dropdown-item {
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+.dropdown-item:hover {
+  background: #1a2a47;
+  border-color: #3e5c7f;
+}
+
+/* Page background with subtle vignette similar to student */
+body {
+  background: radial-gradient(1200px 600px at 85% -10%, rgba(56, 189, 248, 0.06), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(168, 85, 247, 0.06), transparent 60%), var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Layout shells */
+.app-layout {
+  background: transparent;
+}
+
+.topbar {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35));
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(6px);
+}
+
+/* Sidebar look & feel */
+.sidebar {
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.65));
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+  color: #dbe8ff;
+  letter-spacing: .3px;
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .85rem;
+  border-radius: .6rem;
+  color: var(--text-secondary);
+  transition: background .2s, color .2s, border-color .2s;
+  border: 1px solid transparent;
+}
+
+.sidebar-nav .nav-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #e5f0ff;
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.sidebar-nav .nav-item.active {
+  background: rgba(59, 130, 246, 0.16);
+  color: #ffffff;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+/* Headings and content containers */
+.section-heading {
+  color: #eaf2ff;
+  font-weight: 700;
+  letter-spacing: .2px;
+  margin-bottom: .5rem;
+}
+
+.content-area .card,
+.resources-list > *:not(.empty-state),
+.events-grid > *:not(.empty-state),
+.grid-2 > div,
+.pad-lg {
+  background: color-mix(in oklab, var(--bg-primary) 70%, #0b1220) !important;
+  border: 1px solid color-mix(in oklab, var(--border-color) 70%, #3a4a62) !important;
+  border-radius: .9rem !important;
+  box-shadow: var(--shadow-md);
+}
+
+/* Lists spacing */
+.resources-list {
+  display: grid;
+  gap: 1rem;
+}
+.events-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Stats cards to match student style */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  background: color-mix(in oklab, var(--bg-primary) 70%, #0b1220);
+  border: 1px solid color-mix(in oklab, var(--border-color) 70%, #3a4a62);
+  border-radius: .9rem;
+  padding: 1rem;
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+}
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: .7rem;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.18), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(59, 130, 246, 0.28);
+}
+.stat-info h3 {
+  color: #eaf2ff;
+}
+
+/* Buttons – subtle glow and rounded corners */
+.btn {
+  border-radius: .7rem;
+}
+.btn-primary {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0.8));
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: rgba(59, 130, 246, 0.95);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+.btn-secondary {
+  background: rgba(30, 41, 59, 0.6);
+  color: #dbe8ff;
+  border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+  background: rgba(30, 41, 59, 0.75);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+.btn-small {
+  padding: .45rem .7rem;
+}
+
+/* Resource / Event cards inner bits */
+.resources-list .resource-title,
+.events-grid h3,
+.grid-2 h3 {
+  color: #eaf2ff;
+}
+
+/* Profile dropdown tone to match */
+.profile-dropdown {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+.profile-dropdown .dropdown-item {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.profile-dropdown .dropdown-item:hover {
+  background: #1a2a47;
+  border-color: #3e5c7f;
+}
+
+/* Primary nav – mirror student design */
+.primary-nav {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .5rem 1rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35));
+  border: 1px solid var(--border-color);
+  border-radius: .75rem;
+}
+.primary-nav a {
+  position: relative;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: .5rem .9rem;
+  border-radius: 9999px;
+  transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+.primary-nav a::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.primary-nav a:hover,
+.primary-nav a.active {
+  color: #eaf2ff;
+  background: rgba(56, 189, 248, 0.08);
+}
+.primary-nav a:hover::after,
+.primary-nav a.active::after {
+  opacity: 1;
+}
+
+/* Admin skin theme: match student’s dark glass design and tokens */
+.admin-skin {
+  /* Local design tokens (scoped) */
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #243244;
+
+  /* Background and base text */
+  background: radial-gradient(1100px 600px at -10% -20%, rgba(14, 165, 233, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 110% 0%, rgba(245, 158, 11, 0.12), transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 60%, #0b1220 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+/* Center containers and unify spacing to match student design */
+.admin-skin .topbar {
+  padding: .75rem 1rem;
+}
+
+.admin-skin .main-content,
+.admin-skin .content-area {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.admin-skin .content-section {
+  margin-block: 1.25rem 2rem;
+  padding: clamp(0.5rem, 1.4vw, 1rem);
+}
+
+/* Responsive, modern grids (parity with student) */
+.admin-skin .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.admin-skin .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.admin-skin .grid-2 {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .admin-skin .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Primary nav spacing now handled by container (removed inline margins) */
+.admin-skin .primary-nav {
+  margin-left: 0;
+}
+
+.admin-skin .primary-nav a {
+  position: relative;
+  color: #e6efff;
+  opacity: 0.92;
+  text-decoration: none;
+  font-weight: 600;
+  padding: .5rem .9rem;
+  border-radius: 9999px;
+  transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+.admin-skin .primary-nav a::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #60a5fa);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .18s ease;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+.admin-skin .primary-nav a:hover,
+.admin-skin .primary-nav a.active {
+  color: #ffffff;
+  background: rgba(56, 189, 248, 0.08);
+}
+.admin-skin .primary-nav a:hover::before,
+.admin-skin .primary-nav a.active::before {
+  transform: scaleX(1);
+}
+
+/* Sidebar look to match student style */
+.admin-skin .sidebar {
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.9), rgba(11, 18, 32, 0.65));
+  border-right: 1px solid var(--border-color);
+}
+.admin-skin .sidebar-header h2 {
+  color: #dbe8ff;
+}
+.admin-skin .sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .85rem;
+  border-radius: .6rem;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.admin-skin .sidebar-nav .nav-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #e5f0ff;
+  border-color: rgba(59, 130, 246, 0.25);
+}
+.admin-skin .sidebar-nav .nav-item.active {
+  background: rgba(59, 130, 246, 0.16);
+  color: #fff;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+/* Cards, lists, grids → glassy like student */
+.admin-skin .content-area .card,
+.admin-skin .resources-list > *:not(.empty-state),
+.admin-skin .events-grid > *:not(.empty-state),
+.admin-skin .grid-2 > div,
+.admin-skin .pad-lg {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  border-radius: .9rem !important;
+  box-shadow: 0 10px 30px -18px rgba(14, 165, 233, 0.35);
+  padding: clamp(0.75rem, 1.6vw, 1.25rem) !important;
+}
+
+/* Stats cards */
+.admin-skin .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.admin-skin .stat-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: .9rem;
+  padding: 1rem 1.1rem;
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+}
+.admin-skin .stat-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: .75rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.03));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  font-size: 22px; /* ensure emoji stays inside */
+  line-height: 1; /* prevent clipping */
+  overflow: hidden; /* guard against overflow */
+}
+.admin-skin .stat-info h3 {
+  color: #38bdf8;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* Buttons */
+.admin-skin .btn {
+  border-radius: .7rem;
+}
+.admin-skin .btn-primary {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0.8));
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #fff;
+}
+.admin-skin .btn-primary:hover {
+  background: rgba(59, 130, 246, 0.95);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+.admin-skin .btn-secondary {
+  background: rgba(30, 41, 59, 0.6);
+  color: #dbe8ff;
+  border: 1px solid var(--border-color);
+}
+.admin-skin .btn-secondary:hover {
+  background: rgba(30, 41, 59, 0.75);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+
+/* Form fields to match student */
+.admin-skin .form-group label {
+  color: #d7e4ff;
+}
+.admin-skin .form-group input,
+.admin-skin .form-group select,
+.admin-skin .form-group textarea {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .7rem;
+  padding: .7rem .85rem;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.admin-skin .form-group input::placeholder,
+.admin-skin .form-group textarea::placeholder {
+  color: #b9c9e3;
+}
+.admin-skin .form-group input:focus,
+.admin-skin .form-group select:focus,
+.admin-skin .form-group textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+
+/* Empty state tint */
+.admin-skin .empty-state p {
+  color: var(--text-secondary);
+}
+
+/* Strong override for topbar primary nav to match student */
+.admin-skin .topbar,
+.admin-skin .topbar .primary-nav {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35)) !important;
+  border-color: var(--border-color) !important;
+  backdrop-filter: blur(6px);
+}
+.admin-skin .topbar .primary-nav a {
+  color: var(--text-secondary);
+}
+.admin-skin .topbar .primary-nav a:hover,
+.admin-skin .topbar .primary-nav a.active {
+  color: #fff;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+/* Ensure all main containers/cards look like student design */
+.admin-skin .content-area,
+.admin-skin .card,
+.admin-skin .resources-list > *:not(.empty-state),
+.admin-skin .events-grid > *:not(.empty-state),
+.admin-skin .grid-2 > div {
+  background: color-mix(in oklab, var(--bg-primary) 70%, #0b1220) !important;
+  border: 1px solid color-mix(in oklab, var(--border-color) 70%, #3a4a62) !important;
+  border-radius: .9rem !important;
+  box-shadow: 0 10px 30px -18px rgba(14, 165, 233, 0.35);
+}
+
+/* Headings and text weight/contrast to match student */
+.admin-skin .section-heading,
+.admin-skin .resources-list .resource-title,
+.admin-skin .events-grid h3 {
+  color: #eaf2ff !important;
+  font-weight: 700;
+  margin-top: .25rem;
+  margin-bottom: .75rem;
+}
+
+/* Stats cards parity */
+.admin-skin .stat-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04)) !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+}
+.admin-skin .stat-info h3 {
+  color: #eaf2ff !important;
+}
+
+/* Buttons parity */
+.admin-skin .btn-primary {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0.8)) !important;
+  border: 1px solid rgba(59, 130, 246, 0.45) !important;
+  color: #fff !important;
+}
+.admin-skin .btn-secondary {
+  background: rgba(30, 41, 59, 0.6) !important;
+  color: #dbe8ff !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* ===== Admin User Management page skin ===== */
+
+.admin-page.student-skin.admin-skin {
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #243244;
+
+  background: radial-gradient(1100px 600px at -10% -20%, rgba(14, 165, 233, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 110% 0%, rgba(245, 158, 11, 0.12), transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 60%, #0b1220 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Navbar themed like student topbar */
+.admin-page.student-skin.admin-skin .navbar {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35));
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(6px);
+}
+.admin-page.student-skin.admin-skin .brand-name {
+  color: #eaf2ff;
+}
+.admin-page.student-skin.admin-skin .brand-subtitle {
+  color: var(--text-secondary);
+}
+
+/* Center and space user-management like student dashboard */
+.admin-page.student-skin.admin-skin .admin-container {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 1rem;
+  padding-block: 1.25rem 2rem;
+}
+
+.admin-page.student-skin.admin-skin .users-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.admin-page.student-skin.admin-skin .user-type-section {
+  padding: 1rem;
+}
+
+/* Cards, grids, lists parity */
+.admin-page.student-skin.admin-skin .admin-content .container,
+.admin-page.student-skin.admin-skin .users-grid .user-type-section,
+.admin-page.student-skin.admin-skin .users-list > *:not(.empty-state),
+.admin-page.student-skin.admin-skin .modal-content {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: .9rem;
+  box-shadow: 0 12px 35px -20px rgba(14, 165, 233, 0.35);
+}
+
+/* Buttons and form fields within user-management */
+.admin-page.student-skin.admin-skin .btn-primary,
+.admin-page.student-skin.admin-skin .btn-secondary {
+  border-radius: .7rem;
+}
+.admin-page.student-skin.admin-skin .btn-primary {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0.8));
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #fff;
+}
+.admin-page.student-skin.admin-skin .btn-secondary {
+  background: rgba(30, 41, 59, 0.6);
+  color: #dbe8ff;
+  border: 1px solid var(--border-color);
+}
+.admin-page.student-skin.admin-skin .form-group label {
+  color: #d7e4ff;
+}
+.admin-page.student-skin.admin-skin .form-group input,
+.admin-page.student-skin.admin-skin .form-group select,
+.admin-page.student-skin.admin-skin .form-group textarea {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .7rem;
+  padding: .7rem .85rem;
+}
+
+/* student-style hero banner, quick actions, spacing utilities (scoped to admin) */
+.admin-skin .hero-card {
+  width: 100%;
+  margin: 1rem 0 1.25rem;
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  background: radial-gradient(900px 400px at 80% -40%, rgba(14, 165, 233, 0.15), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: .9rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 35px -20px rgba(14, 165, 233, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: clamp(160px, 22vw, 260px);
+}
+.admin-skin .hero-content {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  text-align: center;
+}
+.admin-skin .hero-content h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  line-height: 1.2;
+  color: #eaf2ff;
+}
+.admin-skin .hero-content p {
+  font-size: clamp(0.9rem, 1.6vw, 1rem);
+  opacity: 0.92;
+  color: #cbd5e1;
+}
+
+/* Quick Actions grid to mirror student */
+.admin-skin .quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: .5rem;
+}
+.admin-skin .action-card {
+  display: grid;
+  align-content: center;
+  gap: .5rem;
+  min-height: 110px;
+  padding: 1rem;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: .9rem;
+  color: #eaf2ff;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.admin-skin .action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -24px rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.1), rgba(255, 255, 255, 0.04));
+}
+.admin-skin .action-card .action-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: .65rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(6, 182, 212, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  font-size: 20px;
+}
+.admin-skin .action-card .action-title {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* Ensure hamburger PNG is visible and sized on dark bg */
+.admin-skin .menu-toggle.stylish {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+.admin-skin .menu-toggle.stylish .hamburger-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+  filter: invert(1) brightness(1.8); /* make it white on dark */
+}
+
+/* hide the three bar spans when the image exists */
+.admin-skin .menu-toggle.stylish img ~ span {
+  display: none;
+}
+
+/* Mobile refinements */
+@media (max-width: 640px) {
+  .admin-skin .topbar {
+    padding: .5rem .5rem;
+  }
+  .admin-skin .section-heading {
+    font-size: 1.25rem;
+  }
+  .admin-skin .stat-card {
+    padding: .75rem;
+  }
+  .admin-skin .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* Laptop/desktop refinements */
+@media (min-width: 1024px) {
+  .admin-skin .content-area {
+    padding-inline: clamp(1rem, 2.2vw, 2rem);
+  }
+}
+
+/* utility to toggle moderation sections */
+.hidden {
+  display: none !important;
+}
+
+/* ensure internal padding so text doesn't touch borders */
+.admin-skin .resources-list > .resource-item,
+.admin-skin .events-grid > .event-card,
+.admin-skin .lost-found-list > .lost-found-item {
+  padding: clamp(0.75rem, 1.6vw, 1.25rem) !important;
+}
+
+/* consistent heading spacing inside cards */
+.admin-skin .resource-item h3,
+.admin-skin .event-card h3,
+.admin-skin .lost-found-item h3 {
+  margin: 0 0 .5rem 0;
+  line-height: 1.25;
+}
+
+/* add comfortable padding to moderation wrappers */
+.admin-skin .grid-2 > div,
+.admin-skin .grid-1 > div {
+  padding: clamp(0.75rem, 1.6vw, 1.25rem) !important;
+}
+
+/* readable meta rows with breathing room */
+.admin-skin .resource-meta span,
+.admin-skin .event-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-right: .6rem;
+  margin-top: .25rem;
+  color: var(--text-secondary);
+}
+
+/* filters row spacing */
+.admin-skin .filters-row {
+  margin-bottom: 1rem;
+}
+
+/* full-width moderation grid with uniform styling */
+.admin-skin .moderation-panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.admin-skin .moderation-panels > div {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  border-radius: .9rem !important;
+  box-shadow: 0 10px 30px -18px rgba(14, 165, 233, 0.35);
+  padding: clamp(1rem, 1.8vw, 1.5rem) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-skin .moderation-panels > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px -16px rgba(14, 165, 233, 0.45);
+}
+
+.admin-skin .moderation-panels h3 {
+  color: #eaf2ff !important;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+}
+
+.admin-skin .moderation-panels .empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.admin-skin .moderation-panels .empty-state p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ensure all moderation lists fill the panel */
+.admin-skin .moderation-panels .resources-list,
+.admin-skin .moderation-panels .events-grid,
+.admin-skin .moderation-panels .lost-found-list {
+  width: 100%;
+}

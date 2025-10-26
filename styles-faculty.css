@@ -1,0 +1,84 @@
+:root {
+  --faculty-primary: #1d4ed8;
+  --faculty-accent: #0ea5e9;
+  --faculty-muted: #eef2ff;
+  --bg-primary: #0f1a2c;
+  --border-color: #3a4a62;
+  --text-primary: #d7e4ff;
+  --bg-tertiary: #b9c9e3;
+  --shadow-lg: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  --shadow-md: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  --shadow-sm: 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+.primary-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem 1rem;
+}
+.profile-menu {
+  position: relative;
+}
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  width: 240px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: .75rem;
+  padding: .75rem;
+  display: none;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
+}
+.profile-dropdown.active {
+  display: block;
+}
+.course-card {
+  background: var(--bg-primary);
+  padding: 1rem;
+  border-radius: .75rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+.stat-card:hover,
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.form-group label {
+  color: #d7e4ff;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .7rem;
+  padding: .7rem .85rem;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #b9c9e3;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+.dropdown-item:hover {
+  background: #1a2a47;
+  border-color: #3e5c7f;
+}

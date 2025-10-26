@@ -1,0 +1,754 @@
+:root {
+  --student-primary: #0ea5e9; /* cyan */
+  --student-accent: #f59e0b; /* amber */
+  --student-muted: rgba(14, 165, 233, 0.12);
+  --student-card: rgba(17, 24, 39, 0.6); /* glass card on dark */
+}
+
+/* Top nav */
+.primary-nav {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .5rem 1rem;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+.primary-nav a {
+  position: relative;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: .5rem .9rem;
+  border-radius: 9999px;
+  transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+.primary-nav a::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.primary-nav a:hover,
+.primary-nav a.active {
+  color: var(--text-primary);
+  background: rgba(56, 189, 248, 0.08);
+}
+.primary-nav a:hover::after,
+.primary-nav a.active::after {
+  opacity: 1;
+}
+
+/* Profile dropdown */
+.profile-menu {
+  margin-left: auto;
+  position: relative;
+}
+.profile-toggle {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  width: 260px;
+  background: color-mix(in oklab, var(--bg-primary) 78%, #000);
+  border: 1px solid color-mix(in oklab, var(--border-color) 65%, #4a607c);
+  border-radius: .75rem;
+  box-shadow: var(--shadow-lg);
+  padding: .75rem;
+  display: none;
+  color: #eaf2ff;
+}
+.profile-dropdown.active {
+  display: block;
+}
+.profile-header {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  padding-bottom: .5rem;
+  border-bottom: 1px dashed color-mix(in oklab, var(--border-color) 70%, #527095);
+  margin-bottom: .5rem;
+}
+.avatar-lg {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: var(--student-muted);
+  color: var(--student-primary);
+  font-weight: 700;
+}
+.dropdown-item {
+  width: 100%;
+  text-align: left;
+  background: color-mix(in oklab, var(--bg-tertiary) 76%, #0c1626);
+  border: 1px solid color-mix(in oklab, var(--border-color) 60%, #4a607c);
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  margin-top: .5rem;
+  cursor: pointer;
+  color: #eaf2ff;
+}
+.dropdown-item:hover {
+  background: color-mix(in oklab, var(--bg-tertiary) 60%, #152339);
+  border-color: #5a7da7;
+}
+
+/* Filters and tabs */
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.filters-row .section-actions {
+  margin-left: auto;
+  align-self: flex-end;
+}
+.filter label {
+  display: block;
+  font-size: .8rem;
+  color: #d7e4ff;
+}
+.filter select,
+.filter input {
+  padding: .5rem .75rem;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .5rem;
+  background: #0f1a2c;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.filter select:focus,
+.filter input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+.filters-row input::placeholder,
+.filters-row textarea::placeholder {
+  color: #b9c9e3;
+}
+.tabs-row {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  margin: .5rem 0 1rem;
+  flex-wrap: wrap; /* added for LF filter row polish */
+}
+.chip {
+  padding: .45rem .9rem;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(120, 160, 200, 0.35);
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.chip.small {
+  padding: .25rem .6rem;
+  font-size: .8rem;
+}
+.chip:hover {
+  transform: translateY(-1px);
+  border-color: #60a5fa;
+  color: #eaf7ff;
+}
+.chip.active {
+  background: color-mix(in oklab, var(--student-primary) 18%, #0c1626);
+  color: #ffffff;
+  border-color: var(--student-primary);
+}
+
+/* Hero banner using abstract gradient */
+.hero-banner {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 220px;
+  margin: .5rem 0 1rem;
+  background: radial-gradient(1200px 500px at -10% -40%, rgba(14, 165, 233, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(99, 102, 241, 0.2), transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 60%, #0b1220 100%);
+  box-shadow: var(--shadow-md);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: #eef2ff;
+  backdrop-filter: blur(2px);
+}
+.hero-title {
+  font-size: clamp(1.25rem, 2.8vw, 2rem);
+  letter-spacing: .2px;
+}
+.hero-subtitle {
+  opacity: 0.9;
+  margin-top: .25rem;
+}
+
+/* Glassy cards with neon pulse */
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(14, 165, 233, 0);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(14, 165, 233, 0.25);
+  }
+}
+@keyframes riseIn {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes newHighlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(14, 189, 248, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.0);
+  }
+}
+
+.stat-card,
+.resource-item,
+.marketplace-item,
+.event-card,
+.discussion-item,
+.lost-found-item {
+  background: var(--student-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: .9rem;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  animation: riseIn .35s ease both;
+}
+.stat-card:hover,
+.resource-item:hover,
+.marketplace-item:hover,
+.event-card:hover,
+.discussion-item:hover,
+.lost-found-item:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--student-primary) 30%, rgba(255, 255, 255, 0.08));
+  animation: glowPulse 1.8s ease-in-out 1;
+}
+[data-new="true"] {
+  border-color: #38bdf8 !important;
+  animation: newHighlight 1.8s ease-in-out 2, riseIn .35s ease both;
+}
+
+/* stat contents more serious */
+.stat-card .stat-icon {
+  display: flex; /* was none */
+  align-items: center;
+  justify-content: center;
+  width: clamp(40px, 5.2vw, 56px);
+  height: clamp(40px, 5.2vw, 56px);
+  font-size: clamp(24px, 3.6vw, 32px);
+  border-radius: .75rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: #eaf2ff;
+}
+.stat-card .stat-info h3 {
+  color: var(--student-primary);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+.stat-card .stat-info p {
+  color: #e3ecff;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+/* action buttons -> tiles */
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: .75rem;
+}
+.action-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid #3a4a62;
+  border-radius: .9rem;
+  padding: .9rem .75rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: #f1f6ff;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  gap: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.action-btn svg {
+  color: var(--student-primary);
+  filter: drop-shadow(0 6px 18px rgba(14, 165, 233, 0.25));
+}
+
+/* Lost & Found item image styling */
+.lost-found-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: .75rem;
+  align-items: center;
+}
+.lost-found-item h3 {
+  color: var(--text-primary);
+}
+.lost-found-item p,
+.lf-meta span {
+  color: #e3ecff;
+  opacity: 0.9;
+}
+.lf-image {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: .6rem;
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+}
+.lf-type {
+  display: inline-block;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  margin-bottom: .25rem;
+}
+.lf-type.lost {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+.lf-type.found {
+  background: rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+/* Chat modal */
+.chat-body {
+  max-height: 260px;
+  overflow: auto;
+  padding: .5rem;
+  display: grid;
+  gap: .5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: .75rem;
+}
+.chat-message {
+  padding: .5rem .75rem;
+  border-radius: .75rem;
+  max-width: 70%;
+  color: #f7fbff;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 8px 20px -12px rgba(14, 165, 233, 0.45);
+}
+.chat-message.left {
+  background: #122038;
+  justify-self: start;
+}
+.chat-message.right {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.22));
+  justify-self: end;
+}
+.chat-input-row {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: .6rem;
+  padding: .5rem;
+}
+.chat-input-row input[type="text"] {
+  flex: 1;
+  background: #0f1a2c;
+  color: #eaf2ff;
+  border: 1px solid #3a4a62;
+  border-radius: .5rem;
+  padding: .55rem .7rem;
+}
+.chat-input-row input::placeholder {
+  color: #9db5d1;
+}
+.chat-input-row .btn.btn-primary.btn-small {
+  box-shadow: 0 6px 18px -8px rgba(56, 189, 248, 0.5);
+}
+
+/* Student skin theme: richer background, improved contrast, modern feel */
+.student-skin {
+  /* Override global tokens locally for student dashboard */
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --text-primary: #f8fafc; /* brighter for legibility */
+  --text-secondary: #cbd5e1; /* lighter muted text */
+  --border-color: #243244;
+  --student-card: rgba(255, 255, 255, 0.06);
+  background: radial-gradient(1100px 600px at -10% -20%, rgba(14, 165, 233, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 110% 0%, rgba(245, 158, 11, 0.12), transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 60%, #0b1220 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+.student-skin .primary-nav a {
+  color: #e6efff;
+  opacity: 0.92;
+}
+.student-skin .primary-nav a::after {
+  display: none !important;
+}
+.student-skin .primary-nav a::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #60a5fa);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .18s ease;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+.student-skin .primary-nav a:hover,
+.student-skin .primary-nav a.active {
+  color: #ffffff;
+}
+.student-skin .primary-nav a:hover::before,
+.student-skin .primary-nav a.active::before {
+  transform: scaleX(1);
+}
+.content-area,
+.content-area p,
+.section-heading,
+.primary-nav a {
+  color: var(--text-primary);
+}
+.empty-state p {
+  color: var(--text-secondary);
+}
+
+/* Ensure topbar avatar is circular, visible and branded */
+.topbar .user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #0b1220;
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9 60%, #38bdf8);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 6px 18px -8px rgba(56, 189, 248, 0.6);
+}
+
+/* Make hamburger visible even if image fails by showing span bars */
+.student-skin .menu-toggle {
+  position: relative;
+}
+.student-skin .menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #e5eef8;
+  margin: 3px auto;
+  border-radius: 2px;
+}
+.hamburger-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+}
+.hamburger-svg .bg {
+  fill: #0f1a2c;
+} /* make hamburger SVG visible on dark background */
+.hamburger-svg .bar {
+  fill: #eaf2ff;
+}
+.menu-toggle:hover .hamburger-svg .bar {
+  fill: #9fd8ff;
+}
+
+/* Refine stat cards to avoid flat dark “boxes” */
+.stat-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 10px 30px -18px rgba(14, 165, 233, 0.35);
+}
+
+/* Marketplace attractive card image and badges */
+.marketplace-item .item-image {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: .7rem;
+  height: 170px;
+  display: grid;
+  place-items: center;
+  color: #8fb6d9;
+}
+
+/* Forms: modern look and clear focus */
+.form-group label,
+.filter label {
+  color: #d7e4ff;
+}
+.form-group input,
+.form-group select,
+.form-group textarea,
+.filter select,
+.filter input {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #f1f6ff;
+  border-radius: .7rem;
+  padding: .7rem .85rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #b9c9e3;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #0c1626;
+}
+.form-group select,
+.filter select {
+  color: #e6efff;
+  background-image: linear-gradient(45deg, transparent 50%, #7fb7ff 50%),
+    linear-gradient(135deg, #7fb7ff 50%, transparent 50%), linear-gradient(to right, #3a4a62, #3a4a62);
+  background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%, calc(100% - 2.3rem) 50%;
+  background-size: 5px 5px, 5px 5px, 1px 1.8rem;
+  background-repeat: no-repeat;
+}
+.student-skin .form-group select,
+.student-skin .filter select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2.6rem; /* space for the custom arrow */
+  /* keep only one blue chevron + a subtle divider line */
+  background-image: linear-gradient(45deg, transparent 50%, #7fb7ff 50%),
+    linear-gradient(135deg, #7fb7ff 50%, transparent 50%), linear-gradient(to right, #3a4a62, #3a4a62);
+  background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%, calc(100% - 2.3rem) 50%;
+  background-size: 5px 5px, 5px 5px, 1px 1.8rem;
+  background-repeat: no-repeat;
+}
+.student-skin select::-ms-expand {
+  /* remove native arrow in IE/Edge legacy */
+  display: none;
+}
+.student-skin .modal-content label {
+  color: #cfe3ff;
+}
+.student-skin .modal-content .form-hint,
+.student-skin .modal-content small,
+.student-skin .modal-content .help-text {
+  color: #9db5d1;
+}
+/* Ensure placeholders remain visible inside dark fields */
+.student-skin .form-group input::placeholder,
+.student-skin .form-group textarea::placeholder {
+  color: #9db5d1;
+}
+/* Ensure options render on dark background when opened */
+.student-skin select option {
+  background: #0b1220;
+  color: #e6efff;
+}
+
+/* highlight active secondary buttons (e.g., voted state) in dark student skin */
+.student-skin .btn.btn-secondary {
+  background: #14213a;
+  color: #e6efff;
+  border: 1px solid #304561;
+}
+.student-skin .btn.btn-secondary:hover {
+  background: #1a2a47;
+  border-color: #3e5c7f;
+}
+.btn.btn-secondary.btn-small.active {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: #48bff7;
+  color: #eaf7ff;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+}
+
+/* improve comment legibility inside community discussions */
+.comments-list .comment {
+  color: var(--text-secondary);
+}
+.comments-list.collapsed {
+  display: none;
+}
+
+/* small utility for inline icons */
+.icon-inline {
+  vertical-align: -2px;
+  margin-right: .35rem;
+  color: var(--student-primary);
+}
+/* optional: ensure buttons with icons align */
+.btn.btn-small svg {
+  vertical-align: -3px;
+  margin-right: .25rem;
+}
+
+/* LF search input: visible placeholder + dark field */
+.lf-search input[type="search"] {
+  background: #0f1a2c;
+  border: 1px solid #3a4a62;
+  color: #eaf2ff;
+  border-radius: .7rem;
+  padding: .55rem .8rem;
+}
+.lf-search input[type="search"]::placeholder {
+  color: #9db5d1;
+}
+
+/* improve LF cards readability */
+.lost-found-list .lost-found-item {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+/* small emoji style to match the old meta icons look */
+.emoji-inline {
+  font-size: .95rem;
+  line-height: 1;
+  vertical-align: -1px;
+  margin-right: .35rem;
+  opacity: 0.95;
+}
+
+/* stat cards: background images with right-side art and fade so text stays readable */
+.stat-card.bg-image {
+  position: relative;
+  overflow: hidden;
+}
+.stat-card.bg-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: 42% auto;
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* put art on right */
+  opacity: 0.45;
+  transform: translateX(0);
+  transition: transform .6s ease, opacity .3s ease;
+  filter: saturate(1.05);
+  pointer-events: none;
+}
+.stat-card.bg-image::after {
+  /* fade from left so text remains readable */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11, 18, 32, 0.92) 0%, rgba(11, 18, 32, 0.68) 50%, rgba(11, 18, 32, 0.0) 82%);
+  pointer-events: none;
+}
+.stat-card.bg-image:hover::before {
+  transform: translateX(6px) scale(1.02);
+}
+
+/* Inline SVG images as data URIs for each card variant (right side) */
+.stat-card.resources::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='%23a5b4fc' stroke-width='3'><rect x='6' y='10' width='14' height='44' rx='3' fill='%231a2740'/><rect x='24' y='10' width='14' height='44' rx='3' fill='%231a2740'/><rect x='42' y='10' width='14' height='44' rx='3' fill='%231a2740'/><line x1='6' y1='20' x2='20' y2='20'/><line x1='24' y1='28' x2='38' y2='28'/><line x1='42' y1='36' x2='56' y2='36'/></svg>");
+}
+.stat-card.events::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='%23fbbf24' stroke-width='3'><circle cx='20' cy='18' r='6' fill='%231a2740'/><circle cx='48' cy='24' r='5' fill='%231a2740'/><path d='M10 46c8-8 18-8 28 0' stroke='%2399f6e4'/><line x1='26' y1='14' x2='54' y2='10'/><line x1='6' y1='24' x2='18' y2='20'/></svg>");
+}
+.stat-card.points::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='%23fde68a' stroke-width='3'><path d='M32 8l7 14 16 2-12 11 3 16-14-7-14 7 3-16L9 24l16-2 7-14z' fill='%231a2740' stroke='%23f59e0b'/></svg>");
+}
+.stat-card.posts::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='%2399c1ff' stroke-width='3'><rect x='8' y='12' width='48' height='34' rx='6' fill='%231a2740'/><path d='M16 28h24M16 20h32M16 36h18'/><path d='M20 46l8-8h16' stroke='%230ea5e9'/></svg>");
+}
+
+/* Better small-screen layout: stack resource actions below info */
+@media (max-width: 720px) {
+  .resource-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
+  .resource-actions {
+    justify-self: start;
+  }
+  .discussions-list .discussion-item .discussion-footer {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .stat-card.bg-image::before {
+    background-size: 55% auto;
+    opacity: 0.4;
+  }
+}
+
+/* select arrow fix across student forms */
+.student-skin select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+.student-skin select::-ms-expand {
+  display: none;
+}
+
+/* Responsive: stack cards nicely on small screens (keeps the old behavior) */
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid .stat-card {
+    padding: .875rem 1rem;
+  }
+}
+
+/* Force calendar picker icon to be white/visible on all dark dashboards */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.4) !important;
+  opacity: 0.9 !important;
+  cursor: pointer;
+}
+input[type="date"] {
+  color-scheme: dark;
+}
